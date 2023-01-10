@@ -19,12 +19,12 @@
 - 예제 -  
 //if today.weekday() in [5,6]: 으로 줄일 수도 있다.  
 if today.weekday() == 6 or today.weekday() == 5:  
-    print("주말이니 회사에 가지 않아!!")  
-    print("온종일 신나게 놀즈아~!")  
+     print("주말이니 회사에 가지 않아!!")  
+     print("온종일 신나게 놀즈아~!")  
 elif today.weekday() == 4:   
-    print("예아!! 오늘은 불금이다!!!")  
+     print("예아!! 오늘은 불금이다!!!")  
 else:   
-    print("오늘은 회사 가는 날....")  
+     print("오늘은 회사 가는 날....")  
 13. 형변환 - 문자열에서 int 자료형으로 변환 한다면  
     year = "2023" //문자열로 저장  
     year = int("2023") // int형으로 변환되어 int형으로 저장  
