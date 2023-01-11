@@ -16,7 +16,7 @@
 11. 연산자 - % 나머지 연산자 나머지를 구할 때 사용   
 12. 조건문 - 파이썬은 {} 대신 :를 사용한다.  
             if, elif, else를 사용한다.  
-```
+```py
 //if today.weekday() in [5,6]: 으로 줄일 수도 있다.  
 if today.weekday() == 6 or today.weekday() == 5:  
       print("주말이니 회사에 가지 않아!!")  
@@ -33,13 +33,18 @@ else:
 15. len() 함수 - 리스트에 요소가 몇개 있는지, 문자열의 길이를 확인하는 함수  
 16. 리스트의 추가/삭제 : append("값") - 리스트 끝에 요소 추가, pop(인덱스 값) - 인덱스 값을 사용하여 삭제, remove("값") - 요소 값으로 삭제  
 17. 요소 개수만큼 루프 반복   
-```
+```py
 animals = ["개", "개미","판다","고양이","박쥐", "염소", "개구리"]  
 for animal in animals:    
       print(animal)    
 ```
 18. 숫자를 이용하여 반복  
-```
+```py
 for i in range(1, 11):  
       print(i)
+```
+19. if 문에서 반대 조건 방법
+```py
+if not userInput.isnumeric(): #숫자가 아닌 값이 입력되면...
+        print(userInput, "숫자를 입력하시요 ㅡㅡ")
 ```
