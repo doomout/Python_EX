@@ -17,7 +17,7 @@
 12. 조건문 - 파이썬은 {} 대신 :를 사용한다.  
             if, elif, else를 사용한다.  
 ```py
-//if today.weekday() in [5,6]: 으로 줄일 수도 있다.  
+#if today.weekday() in [5,6]: 으로 줄일 수도 있다.  
 if today.weekday() == 6 or today.weekday() == 5:  
       print("주말이니 회사에 가지 않아!!")  
       print("온종일 신나게 놀즈아~!")  
@@ -46,5 +46,5 @@ for i in range(1, 11):
 19. if 문에서 반대 조건 방법
 ```py
 if not userInput.isnumeric(): #숫자가 아닌 값이 입력되면...
-        print(userInput, "숫자를 입력하시요 ㅡㅡ")
+      print(userInput, "숫자를 입력하시요 ㅡㅡ")
 ```
