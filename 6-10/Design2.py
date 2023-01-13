@@ -1,14 +1,20 @@
-#추측 문자를 저장할 리스트
-guessedLetters = []
+gameWord = "apple"
+guessedLetters = ['a', 'e']
+maskChar = "_"
 
-for i in range(0,5):
-    #추측 입력받기
-    currGuess = input("추측 문자: ").strip().lower()
-    #리스트 추가하기
-    guessedLetters.append(currGuess)
-
-#리스트 정렬하기
-guessedLetters.sort()
-
-#출력하기
-print(guessedLetters)
+#빈 문자열로 시작하기
+displayWord = ""
+#한 문자씩 반복하기
+for letter in gameWord:
+    print(letter)
+    #추측한 문자가 맞나?
+    if letter in guessedLetters:
+        print("맞앗쓰")
+        displayWord += letter
+    else:
+        print("틀렸쓰")
+        displayWord += maskChar
+    print("displayWord는", displayWord, "입니다.")
+#결과 단어 출력하기
+print("원래 단어: ", gameWord)
+print("마스킹한 단어: ", displayWord)
