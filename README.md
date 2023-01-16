@@ -67,4 +67,18 @@ multiply(10, 5) #10x5=50 출력
 def doBeeping():
     pass 
 ```
-
+22. 딕셔너리 만들기 : {}를 사용하여 키 : 값 으로 이루어진 자료형, 리스트는 [] 로 감싼다.
+```py
+pet = {
+    "animal" : "Iguana",
+    "name" : "Iggy",
+    "food" : "Veggies",
+    "mealsPerDay" : 1
+}
+pet["mealsPerDay"] = 2 #값을 2로 재할당
+pet.update({"mealsPerDay":2}) #이와 같이 변경도 가능
+clear()  #모든 요소를 삭제
+copy()   #요소 복사
+keys()   #모든 키를 리스트로 반환
+values() #모든 값을 리스트로 반환
+```
