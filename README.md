@@ -49,7 +49,7 @@ if not userInput.isnumeric(): #숫자가 아닌 값이 입력되면...
       print(userInput, "숫자를 입력하시요 ㅡㅡ")
 ```
 20. 함수 선언법  
-```
+```py
 #Hello를 출력하는 함수(인수가 없는 경우)
 def sayHello(): #def는 define의 줄임말이다.
       print("Hello")
@@ -61,5 +61,10 @@ def multiply(n1, n2)
       print(n1, "x", n2, "=", n1 * n2)
 
 multiply(10, 5) #10x5=50 출력
+```
+21. 빈 함수 만들기 : 세부 구현 전에 구조 잡을 때 아래와 같이 선언하면 오류가 나지 않는다.
+```py
+def doBeeping():
+    pass 
 ```
 
