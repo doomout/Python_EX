@@ -48,3 +48,18 @@ for i in range(1, 11):
 if not userInput.isnumeric(): #숫자가 아닌 값이 입력되면...
       print(userInput, "숫자를 입력하시요 ㅡㅡ")
 ```
+20. 함수 선언법  
+```
+#Hello를 출력하는 함수(인수가 없는 경우)
+def sayHello(): #def는 define의 줄임말이다.
+      print("Hello")
+
+sayHello() #Hello 출력
+
+#숫자 2개를 곱하고 출력하는 함수(인수가 있는 경우)
+def multiply(n1, n2)
+      print(n1, "x", n2, "=", n1 * n2)
+
+multiply(10, 5) #10x5=50 출력
+```
+
