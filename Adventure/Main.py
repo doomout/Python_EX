@@ -1,5 +1,7 @@
 #외부 텍스트 불러오기
 import Strings
+import Utils
+
 
 #플레이어 환영 메시지
 def doWelcome():
@@ -11,18 +13,12 @@ def doStart():
     #텍스트 출력하기
     print(Strings.get("Start"))
 
-    #플레이어 행동 선택
-    choice = " "
-    while not choice in "PSBR":
-        print("-당신이 할 수 있는 일-")
-        print("P = 바위 더미를 조사한다.")
-        print("S = 구조물에 접근한다.")
-        print("B = 삐 소리가 나는 곳으로 간다")
-        print("R = 도망간다")
-
-        choice = input("당신의 선택은?[P/S/B/R]").strip().upper()
-        print("----------------------")
-
+    #플레이어가 선택할 수 있는 해동은?
+    choices = [["P", "바위 더미를 조사한다."],
+               ["S", "구조물에 접근한다."],
+               ["B", "삐 소리가 나는 곳으로 간다"],
+               ["R", "도망간다"] ]
+    choice = Utils.getUserChoice(choices)
     #선택 처리하기
     if choice == 'P':
         doBoulders() #바위 더미 조사하기
@@ -43,18 +39,13 @@ def doBoulders():
 def doStructure():
     print(Strings.get("Structure"))
 
-    #플레이어 행동 선택
-    choice = " "
-    while not choice in "SDBR":
-        print("-당신이 할 수 있는 일-")
-        print("S = 시작 지점으로 돌아간다.")
-        print("D = 문을 연다")
-        print("B = 삐 소리가 나는 곳으로 간다.")
-        print("R = 도망간다!")
-
-        choice = input("당신의 선택은?[P/S/B/R]").strip().upper()
-        print("-------------------------")
-
+    #플레이어가 선택할 수 있는 해동은?
+    choices = [["S", "시작 지점으로 돌아간다."],
+               ["D", "문을 연다"],
+               ["B", "삐 소리가 나는 곳으로 간다."],
+               ["R", "도망간다!"] ]
+    choice = Utils.getUserChoice(choices)
+   
     #선택 처리하기
     if choice == 'S':
         doStart() #시작 지점으로 간다.
@@ -69,14 +60,11 @@ def doStructure():
 def doStructureDoor():
     print(Strings.get("StructurDoor"))
 
-    choice = " "
-    while not choice in "SR":
-        print("당신이 할 수 있는 일:")
-        print("S = 구조물로 돌아간다.")
-        print("R = 도망간다!")
-        choice = input("당신의 선택은?[S/R]").strip().upper()
-        print("----------------------")
-    
+    #플레이어가 선택할 수 있는 해동은?
+    choices = [["S", "시작 지점으로 돌아간다."],
+               ["R", "도망간다!"] ]
+    choice = Utils.getUserChoice(choices)
+
     if choice == 'S':
         doStructure()
     elif choice == 'R':
