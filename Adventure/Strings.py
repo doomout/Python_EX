@@ -23,6 +23,13 @@ def get(id):
     elif id == "StructureDoorNoKey":
         return ("그 쪽으로 손을 내밀지만 파란 빛이 번쩍이며 닫혀 버린다.\n"
                 "계획한 대로 잘 되진 않는다.")
+    elif id == "StructureDoorKey":
+        return ("손에 쥔 열쇠를 바라봅니다.\n"
+                "이 열쇠는 열쇠 구멍과 마찬가지로 파랗게 빛납니다.")
+    elif id == "BouldersKey":
+        return ("가까이 다가갑니다. 저 푸른 불빛은 뭐지?\n"
+                "바위틈으로 손을 뻗어 무언가를 더듬습니다.\n"
+                "그것은 다름이 아니라 파랗게 빛나는 열쇠였습니다.")
     elif id == "Run":
         return ("한동안 달린다.\n"
                 "저 멀리서 악마가 샷건을 들고 달려온다.\n"
