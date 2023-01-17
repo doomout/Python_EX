@@ -2,6 +2,7 @@
     "python.analysis.extraPaths": [
         "./Adventure",
         "./Adventure",
+        "./Adventure",
         "./Adventure"
     ]
 }

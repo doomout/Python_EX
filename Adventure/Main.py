@@ -2,7 +2,10 @@
 import Strings
 import Utils
 import Inventory as inv #Inventory를 줄이고자 inv로 별칭을 지정한다.
+import Player
 
+#player 객체 생성하기
+p = Player.player()
 
 #플레이어 환영 메시지
 def doWelcome():
@@ -36,15 +39,18 @@ def doStart():
     
 #장소: 바위더미
 def doBoulders():
-    #플레이어는 열쇠를 가졌는가?
-    if not inv.hasStructureKey():
-        #아니요, 텍스트 출력하기
-        print(Strings.get("BouldersKey"))
-        #열쇠를 인벤토리에 추가하기
+    #이 방문 추적하기
+    p.visitBoulder()
+    
+    #텍스트 출력하기 3번 방문하면 열쇠를 찾는다.
+    if p.getBoulderVisits() == 1:
+        print(Strings.get("Boulders")) #평범한 바위 설명 출력하기
+    elif p.getBoulderVisits() == 3:
+        print(Strings.get("BouldersKey")) #키를 발견한 설명 출력하기
         inv.takeStructureKey()
     else:
-        #예, 그러므로 평범한 바위 설명 출력하기
-        print(Strings.get("Boulders"))
+        print(Strings.get("Boulders2")) #평범한 바위 설명 출력하기2
+    
     #시작으로 돌아가기
     doStart()
 
@@ -103,11 +109,22 @@ def doEnterStructure():
 def doBeeping():
     pass
 
-#도망치기
+#도망치기 도망 갈 때 마다 생명력 -1개 0개 되면 사망
 def doRun():
+    #텍스트 출력
     print(Strings.get("Run"))
-    #사망, 게임 끝내기
-    gameOver()
+     #생명력 -1씩 처리
+    p.died()
+    #생명력이 남아 있나?
+    if p.isAlive():
+        print(p.livesLeft, "개의 생명력이 남았습니다.\n"
+              "--------------------------------") #생명력 표시 하기
+        doStart()
+    else:
+        print("당신의 생명력이 다 했습니다.\n"
+              "--------------------------")
+        #사망, 게임 끝내기
+        gameOver()
 
 #게임 끝내기
 def gameOver():
