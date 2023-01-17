@@ -80,11 +80,11 @@ def doStructureDoor():
         print(Strings.get("StructureDoorNoKey"))
 
     #플레이어가 선택할 수 있는 해동은?
-    choices = [["S", "시작 지점으로 돌아간다."],
+    choices = [["S", "구조물로 돌아간다."],
                ["R", "도망간다!"] ]
     #플레이어는 열쇠를 가졌는가?
     if inv.hasStructureKey():
-        choice.insert(0, ["U", "문 열쇠 풀기"])
+        choices.insert(0, ["U", "문 열쇠 풀기"])
 
     #플레이어 행동 선택 프롬프트
     choice = Utils.getUserChoice(choices)

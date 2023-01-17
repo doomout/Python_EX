@@ -8,7 +8,7 @@ def takeStructureKey():
     inv["StructureKey"] = True
 
 #인벤토리에 열쇠 없애기
-def takeStructureKey():
+def dropStructureKey():
     inv["StructureKey"] = False
 
 #플레이어는 열쇠를 가졌는가?
@@ -20,7 +20,7 @@ def takeCoins(coins):
     inv["Coins"] += coins
 
 #인벤토리에서 동선 없애기
-def takeCoins(coins):
+def dropCoins(coins):
     inv["Coins"] -= coins
 
 #플레이어가 가진 동전은 몇 개인가요?
