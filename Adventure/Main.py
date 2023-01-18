@@ -3,6 +3,7 @@ import Strings
 import Utils
 import Inventory as inv #Inventory를 줄이고자 inv로 별칭을 지정한다.
 import Player
+from colorama import init, Fore #colorama 초기화
 
 #player 객체 생성하기
 p = Player.player()
@@ -10,12 +11,12 @@ p = Player.player()
 #플레이어 환영 메시지
 def doWelcome():
     #텍스트 출력하기
-    print(Strings.get("Welcome"))
+    print(Fore.GREEN + Strings.get("Welcome"))
 
 #게임 출발점
 def doStart():
     #텍스트 출력하기
-    print(Strings.get("Start"))
+    print(Fore.YELLOW +Strings.get("Start"))
 
     #플레이어가 선택할 수 있는 해동은?
     choices = [["P", "바위 더미를 조사한다."],
@@ -77,13 +78,13 @@ def doStructure():
 
 #장소: 구조물 입구
 def doStructureDoor():
-    print(Strings.get("StructurDoor"))
+    print(Fore.GREEN + Strings.get("StructurDoor"))
 
     #열쇠가 있을 때 출력
     if inv.hasStructureKey():
-        print(Strings.get("StructureDoorKey"))
+        print(Fore.GREEN + Strings.get("StructureDoorKey"))
     else:
-        print(Strings.get("StructureDoorNoKey"))
+        print(Fore.RED + Strings.get("StructureDoorNoKey"))
 
     #플레이어가 선택할 수 있는 해동은?
     choices = [["S", "구조물로 돌아간다."],
@@ -112,23 +113,23 @@ def doBeeping():
 #도망치기 도망 갈 때 마다 생명력 -1개 0개 되면 사망
 def doRun():
     #텍스트 출력
-    print(Strings.get("Run"))
+    print(Fore.RED + Strings.get("Run"))
      #생명력 -1씩 처리
     p.died()
     #생명력이 남아 있나?
     if p.isAlive():
-        print(p.livesLeft, "개의 생명력이 남았습니다.\n"
+        print(Fore.RED,p.livesLeft, "개의 생명력이 남았습니다.\n"
               "--------------------------------") #생명력 표시 하기
         doStart()
     else:
-        print("당신의 생명력이 다 했습니다.\n"
+        print(Fore.RED+"당신의 생명력이 다 했습니다.\n"
               "--------------------------")
         #사망, 게임 끝내기
         gameOver()
 
 #게임 끝내기
 def gameOver():
-    print(Strings.get("GameOver"))
+    print(Fore.WHITE + Strings.get("GameOver"))
 
 #실제 게임 시작은 이곳에서 환영 메시지 출력하기
 doWelcome()

@@ -1,3 +1,5 @@
+from colorama import Fore
+
 inv = {
     "StructureKey" : False,
     "Coins" : 0
@@ -29,8 +31,8 @@ def numCoins():
 
 #인벤토리 출력하기
 def display():
-    print("****인벤토리****")
-    print("가진 동전은 ",numCoins(), "개입니다.")
+    print(Fore.CYAN+"*****인벤토리*****")
+    print(Fore.CYAN+"가진 동전은 ",numCoins(), "개입니다.")
     if hasStructureKey():
-        print("파랑게 빛나는 열쇠가 있습니다.")
-    print("******************")
+        print(Fore.CYAN+"파랑게 빛나는 열쇠가 있습니다.")
+    print(Fore.CYAN+"****************")

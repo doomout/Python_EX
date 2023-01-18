@@ -5,7 +5,7 @@ p = Player.player()
 
 def get(id):
     if id == "Welcome":
-        return (p.name + "은 어떤 곳에 떨어졌습니다.\n"
+        return (p.name + "가 어떤 곳에 떨어졌습니다.\n"
                 "여기가 어디인지 황당합니다.\n"
                 "근처에 뭐가 있는지 둘러봅니다.\n"
                 "-------------------------")
