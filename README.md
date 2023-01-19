@@ -82,3 +82,27 @@ copy()   #요소 복사
 keys()   #모든 키를 리스트로 반환
 values() #모든 값을 리스트로 반환
 ```
+23. 직렬화란? 파이썬에서 데이터 직렬화란 변수, 리스트, 클래스, 딕셔너리 등의 파이썬 객체를 저장할 수 있는 바이트 문자열로 바꾸는 것  
+    역직렬화란? 그 반대로 바이트 문자열을 다시 파이썬 객체로 바꾸는 것   
+24. 파일 저장하려면 pickle라는 파이썬 라이브러리를 사용해야 한다.
+```py
+from os import path
+import pickle
+
+#데이터 파일
+saveDataFile = "saveFile.p"
+
+#데이터 객체 만들기
+db = {
+      "inv" : inv,
+      "player" : player
+}
+#저장하기
+pickle.dump(db, open(saveDataFile, "wb")) #wb는 데이터 쓰기 모드
+
+#저장한 파일 읽기
+if path.isfile(saveDataFile): #저장한 파일이 있는가?
+      db = pickle.load(open(saveDataFile, "rb")) #rb는 데이터 읽기 모드
+      inv = db["inv"]
+      player = db["player"]
+```

@@ -67,7 +67,7 @@ class player:
             #더 높아지면 최댓값으로
             self.health = self.maxHealth
     
-    #체력 읽기
+    #체력 잃기
     def loseHealth(self, health):
         self.health -= health
         #0 아래로 내려가지 않도록

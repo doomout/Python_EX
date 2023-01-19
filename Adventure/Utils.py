@@ -1,3 +1,5 @@
+import random
+
 #선택지 리스트와 선택 프롬프트를 출력하고 사용자 선택을 반환한다.
 #[["문자", "출력 텍스트"]]와 같이 리스트로 이루어진 리스트 형식으로 전달한다.
 #선택한 문자를 반환한다.
@@ -43,3 +45,8 @@ choices = [
 choice = getUserChoice(choices)
 print(choice)
 '''
+
+#무작위 이벤트가 발생할 확율 함수
+#발생 빈도 전달하기(2: 2번 중 1번, 3: 3번중 1번 등)
+def randomEvent(freq):
+    return True if random.randrange(0, freq) == 0 else False
