@@ -7,6 +7,9 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 RED = (255,0,0)
 
+#게임 변수 초기화 하기
+moveSpeed = 5
+
 #게임 경로 설정하기
 GAME_ROOT_FOLDER = os.path.dirname(__file__)
 IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
@@ -39,7 +42,7 @@ v = IMG_ROAD.get_height() - (IMG_PLAYER.get_height()//2) #세로 위치는 화�
 
 #player 스프라이트 만들기
 player = pygame.sprite.Sprite()
-player.image = IMG_PLAYER
+player.image = IMG_PLAYER 
 player.surf = pygame.Surface(IMG_PLAYER.get_size())
 player.rect = player.surf.get_rect(center = (h,v))
 
@@ -67,9 +70,44 @@ while True:
     #플레이어 화면에 표시
     screen.blit(player.image, player.rect)
     
+    #키보드를 눌렀을 때
+    keys = pygame.key.get_pressed()
+    
+    #왼쪽 화살표 키인지 확인하기
+    if keys[K_LEFT] and player.rect.left > 0:
+        #왼쪽으로 움직이기
+        player.rect.move_ip(-moveSpeed, 0)
+        #너무 왼쪽으로 가지 않도록 막기
+        if player.rect.left < 0:
+            #너무 갔다면 되돌리기
+            player.rect.left = 0
+    
+    #오른쪽 화살표 키인지 확인하기
+    if keys[K_RIGHT] and player.rect.right < IMG_ROAD.get_width():
+        #오른쪽으로 움직이기
+        player.rect.move_ip(moveSpeed, 0)
+        #너무 오른쪽으로 가지 않도록 막기
+        if player.rect.right > IMG_ROAD.get_width():
+            #너무 갔다면 되돌리기
+            player.rect.right = IMG_ROAD.get_width()
+    
     #적 화면에 표시
     screen.blit(enemy.image, enemy.rect)
     
+    #적을 아래쪽으로 움직이기
+    enemy.rect.move_ip(0, moveSpeed) 
+    
+    #화면 밖으로 나갔는지 확인하기
+    if (enemy.rect.bottom > IMG_ROAD.get_height()):
+        #그렇다면 다시 위로 보내기
+        #enemy.rect.top = 0
+        #새로 무작위 위치 계산하기
+        hl = IMG_ENEMY.get_width()//2
+        hr = IMG_ROAD.get_width() - (IMG_ENEMY.get_width()//2)
+        h = random.randrange(hl, hr)
+        v = 0
+        #화면에 표시
+        enemy.rect.center = (h, v)
     #이벤트 확인하기
     for event in pygame.event.get():
         #플레이어가 게임을 그만 두는가?
