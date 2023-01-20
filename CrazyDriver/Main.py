@@ -1,5 +1,5 @@
 import pygame
-import sys,os, random
+import sys,os, random, time
 from pygame.locals import * #pygame 라이브러리의 모든 지역 변수를 불러오기 위해
 
 #게임 색상 정의 하기(상수는 대문자로 지정)
@@ -11,6 +11,8 @@ RED = (255,0,0)
 moveSpeed = 5 #이동 속도
 maxSpeed = 10 #최대 이동 속도
 score = 0  #적 자동차가 아래에 닿으면 피한걸로 간주하고 + 1점
+textFonts = ['comicsansms', 'arial']
+textSize = 48
 
 #게임 경로 설정하기
 GAME_ROOT_FOLDER = os.path.dirname(__file__)
@@ -18,6 +20,21 @@ IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
 
 #게임 끝내기 함수
 def GameOver():
+    #게임 끝내기 문자열 만들기
+    fontGameOver = pygame.font.SysFont(textFonts, textSize)
+    textGameOver = fontGameOver.render("Game Over!", True, RED)
+    rectGameOver = textGameOver.get_rect()
+    rectGameOver.center = (IMG_ROAD.get_width()//2, IMG_ROAD.get_height()//2)
+    #검은색 배경에 게임 오버 메시지 출력하기
+    screen.fill(BLACK)
+    screen.blit(textGameOver, rectGameOver)
+    #출력 업데이트하기
+    pygame.display.update()
+    #객체 정리하기
+    player.kill()
+    enemy.kill()
+    #일시 정지하기
+    time.sleep(5)
     #게임 끝내기
     pygame.quit()
     sys.exit()
