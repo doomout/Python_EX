@@ -118,3 +118,12 @@ RED = (255,0,0)
 ```
 27. 프레임 레이트란? 게임을 플레이 할 때 화면이 바뀌는 빈도는 FPS로 나타내며, 
     이 값을 프레임 레이트라고 한다. 이 값이 높을수록 게임이 자연스럽지만 프로세스 점유율이 높아진다.  
+28. 살행하는 코드의 경로를 알 수 있는 방법
+```py
+import os #운영체제에 관한 함수 라이브러리
+#게임 경로 설정하기
+GAME_ROOT_FOLDER = os.path.dirname(__file__)
+IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
+print("게임 루트:" , GAME_ROOT_FOLDER)
+print("이미지 폴더:", IMAGE_FOLDER)
+```
