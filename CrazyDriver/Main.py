@@ -14,6 +14,12 @@ moveSpeed = 5
 GAME_ROOT_FOLDER = os.path.dirname(__file__)
 IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
 
+#게임 끝내기 함수
+def GameOver():
+    #게임 끝내기
+    pygame.quit()
+    sys.exit()
+
 #게임 시작 위치
 #파이 게임 초기화 하기
 pygame.init()
@@ -62,6 +68,8 @@ enemy.rect = enemy.surf.get_rect(center=(h,v))
 #배경 색상 결정하기
 screen.fill(WHITE)
 
+
+
 #메인 게임 루프(시작~끝까지 이 안에서 동작한다)
 while True:
     #배경은 고정(이미지 복사)
@@ -108,8 +116,13 @@ while True:
         v = 0
         #화면에 표시
         enemy.rect.center = (h, v)
+        
     #이벤트 확인하기
     for event in pygame.event.get():
+        #충돌 확인하기
+        if pygame.sprite.collide_rect(player, enemy): #collide_rect() 두 객체가 겹치면  True반환
+            #충돌! 게임오버
+            GameOver()
         #플레이어가 게임을 그만 두는가?
         if event.type == QUIT:
             #게임 끝내기
