@@ -8,7 +8,9 @@ WHITE = (255,255,255)
 RED = (255,0,0)
 
 #게임 변수 초기화 하기
-moveSpeed = 5
+moveSpeed = 5 #이동 속도
+maxSpeed = 10 #최대 이동 속도
+score = 0  #적 자동차가 아래에 닿으면 피한걸로 간주하고 + 1점
 
 #게임 경로 설정하기
 GAME_ROOT_FOLDER = os.path.dirname(__file__)
@@ -29,9 +31,6 @@ clock = pygame.time.Clock()
 
 #프레임 레이트 설정하기
 clock.tick(60)
-
-#제목 표시줄 설정하기
-pygame.display.set_caption("Crazy Driver")
 
 #이미지 불러오기
 IMG_ROAD = pygame.image.load(os.path.join(IMAGE_FOLDER,"Road.png")) #배경
@@ -68,8 +67,6 @@ enemy.rect = enemy.surf.get_rect(center=(h,v))
 #배경 색상 결정하기
 screen.fill(WHITE)
 
-
-
 #메인 게임 루프(시작~끝까지 이 안에서 동작한다)
 while True:
     #배경은 고정(이미지 복사)
@@ -80,6 +77,10 @@ while True:
     
     #키보드를 눌렀을 때
     keys = pygame.key.get_pressed()
+    
+    #제목 표시줄 - score 표시
+    pygame.display.set_caption("Crazy Driver - Score " + str(score))
+
     
     #왼쪽 화살표 키인지 확인하기
     if keys[K_LEFT] and player.rect.left > 0:
@@ -105,7 +106,7 @@ while True:
     #적을 아래쪽으로 움직이기
     enemy.rect.move_ip(0, moveSpeed) 
     
-    #화면 밖으로 나갔는지 확인하기
+    #적이 화면 밖(하단)으로 나갔는지 확인하기
     if (enemy.rect.bottom > IMG_ROAD.get_height()):
         #그렇다면 다시 위로 보내기
         #enemy.rect.top = 0
@@ -116,6 +117,8 @@ while True:
         v = 0
         #화면에 표시
         enemy.rect.center = (h, v)
+        #점수 업데이트 하기
+        score += 1
         
     #이벤트 확인하기
     for event in pygame.event.get():
