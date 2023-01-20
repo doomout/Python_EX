@@ -127,3 +127,5 @@ IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
 print("게임 루트:" , GAME_ROOT_FOLDER)
 print("이미지 폴더:", IMAGE_FOLDER)
 ```
+29. 스프라이트란? 큰 이미지 위에 놓인 2차원 이미지를 뜻함. 스프라이트는 표시하거나 숨길수 있고, 움직이거나 회전할 수도 있다.  
+    자동차는 움직여야 하니 스프라이트로 만든다.
