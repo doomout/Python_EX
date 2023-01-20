@@ -81,7 +81,6 @@ while True:
     #제목 표시줄 - score 표시
     pygame.display.set_caption("Crazy Driver - Score " + str(score))
 
-    
     #왼쪽 화살표 키인지 확인하기
     if keys[K_LEFT] and player.rect.left > 0:
         #왼쪽으로 움직이기
@@ -104,7 +103,10 @@ while True:
     screen.blit(enemy.image, enemy.rect)
     
     #적을 아래쪽으로 움직이기
-    enemy.rect.move_ip(0, moveSpeed) 
+    if score > 100:
+        enemy.rect.move_ip(0, moveSpeed) 
+    else:
+        enemy.rect.move_ip(0, moveSpeed) 
     
     #적이 화면 밖(하단)으로 나갔는지 확인하기
     if (enemy.rect.bottom > IMG_ROAD.get_height()):
@@ -117,15 +119,18 @@ while True:
         v = 0
         #화면에 표시
         enemy.rect.center = (h, v)
-        #점수 업데이트 하기
+        #점수 업데이트 하기            
         score += 1
+        #속도 올리기
+        if moveSpeed < maxSpeed:
+            moveSpeed += 1    
+    #충돌 확인하기
+    if pygame.sprite.collide_rect(player, enemy): #collide_rect() 두 객체가 겹치면  True반환
+        #충돌! 게임오버            
+        GameOver()
         
     #이벤트 확인하기
     for event in pygame.event.get():
-        #충돌 확인하기
-        if pygame.sprite.collide_rect(player, enemy): #collide_rect() 두 객체가 겹치면  True반환
-            #충돌! 게임오버
-            GameOver()
         #플레이어가 게임을 그만 두는가?
         if event.type == QUIT:
             #게임 끝내기
