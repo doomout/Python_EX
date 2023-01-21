@@ -8,7 +8,8 @@ WHITE = (255,255,255)
 RED = (255,0,0)
 
 #게임 변수 초기화 하기
-moveSpeed = 5 #이동 속도
+startSpeed = 5 #처음 이동 속도
+moveSpeed = startSpeed#이동 속도 초기화
 maxSpeed = 10 #최대 이동 속도
 score = 0  #적 자동차가 아래에 닿으면 피한걸로 간주하고 + 1점
 textFonts = ['comicsansms', 'arial']
@@ -60,6 +61,9 @@ IMG_ENEMYS = []
 IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy.png")))
 IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy2.png")))
 IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy3.png")))
+#장애물 이미지
+IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"IceCube.png")))
+
 
 #게임 화면 초기화 하기(가로, 세로)
 screen = pygame.display.set_mode((500,800)) 
@@ -174,9 +178,14 @@ while True:
         if moveSpeed < maxSpeed:
             moveSpeed += 1    
     #충돌 확인하기
-    if pygame.sprite.collide_rect(player, enemy): #collide_rect() 두 객체가 겹치면  True반환
-        #충돌! 게임오버            
-        GameOver()
+    if eNum >= 0 and pygame.sprite.collide_rect(player, enemy): #collide_rect() 두 객체가 겹치면  True반환
+        #적 번호가 3인가?(얼음조각)
+        if eNum == 3:
+            #얼음 덩어리면 속도 되돌리기
+            moveSpeed = startSpeed
+        else:
+            #충돌! 게임오버            
+            GameOver()
         
     #이벤트 확인하기
     for event in pygame.event.get():
