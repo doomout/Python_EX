@@ -14,6 +14,7 @@ score = 0  #적 자동차가 아래에 닿으면 피한걸로 간주하고 + 1�
 textFonts = ['comicsansms', 'arial']
 textSize = 48
 paused = False #일시 정지 상태가 아님
+eNum = -1 #적 구분 변수
 
 #게임 경로 설정하기
 GAME_ROOT_FOLDER = os.path.dirname(__file__)
@@ -53,7 +54,12 @@ clock.tick(60)
 #이미지 불러오기
 IMG_ROAD = pygame.image.load(os.path.join(IMAGE_FOLDER,"Road.png")) #배경
 IMG_PLAYER = pygame.image.load(os.path.join(IMAGE_FOLDER,"Player.png")) #플레이어 자동차
-IMG_ENEMY = pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy.png")) #적 자동차
+#IMG_ENEMY = pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy.png")) #적 자동차
+#적 자동차 이미지 리스트
+IMG_ENEMYS = []
+IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy.png")))
+IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy2.png")))
+IMG_ENEMYS.append(pygame.image.load(os.path.join(IMAGE_FOLDER,"Enemy3.png")))
 
 #게임 화면 초기화 하기(가로, 세로)
 screen = pygame.display.set_mode((500,800)) 
@@ -69,18 +75,7 @@ player.image = IMG_PLAYER
 player.surf = pygame.Surface(IMG_PLAYER.get_size())
 player.rect = player.surf.get_rect(center = (h,v))
 
-#적
-#적 초기 위치 계산하기
-h1 = IMG_ENEMY.get_width()//2
-hr = IMG_ROAD.get_width() - (IMG_ENEMY.get_width()//2)
-h = random.randrange(h1, hr) #가로 위치는 랜덤
-v = 0 #세로 위치
 
-#enemy 스프라이트 만들기
-enemy = pygame.sprite.Sprite()
-enemy.image = IMG_ENEMY
-enemy.surf = pygame.Surface(IMG_ENEMY.get_size())
-enemy.rect = enemy.surf.get_rect(center=(h,v))
 
 #배경 색상 결정하기
 screen.fill(WHITE)
@@ -138,7 +133,24 @@ while True:
             moveSpeed = 0
             #일시 정지 중이라 표시하기
             paused = True
-            
+    
+    #적이 있는지 확인하기
+    if eNum == -1:
+        #무작위로 적 발생
+        eNum = random.randrange(0, len(IMG_ENEMYS))
+
+        #적 초기 위치 계산하기
+        h1 = IMG_ENEMYS[eNum].get_width()//2
+        hr = IMG_ROAD.get_width() - (IMG_ENEMYS[eNum].get_width()//2)
+        h = random.randrange(h1, hr) #가로 위치는 랜덤
+        v = 0 #세로 위치
+        
+        #enemy 스프라이트 만들기
+        enemy = pygame.sprite.Sprite()
+        enemy.image = IMG_ENEMYS[eNum]
+        enemy.surf = pygame.Surface(IMG_ENEMYS[eNum].get_size())
+        enemy.rect = enemy.surf.get_rect(center=(h,v))
+        
     #적 화면에 표시
     screen.blit(enemy.image, enemy.rect)
     
@@ -150,18 +162,15 @@ while True:
     
     #적이 화면 밖(하단)으로 나갔는지 확인하기
     if (enemy.rect.bottom > IMG_ROAD.get_height()):
-        #그렇다면 다시 위로 보내기
-        #enemy.rect.top = 0
-        #새로 무작위 위치 계산하기
-        hl = IMG_ENEMY.get_width()//2
-        hr = IMG_ROAD.get_width() - (IMG_ENEMY.get_width()//2)
-        h = random.randrange(hl, hr)
-        v = 0
-        #화면에 표시
-        enemy.rect.center = (h, v)
-        #점수 업데이트 하기            
+        #enemy 객체 없애기
+        enemy.kill()
+        #적 없음
+        eNum = -1
+        #점수 올리기
         score += 1
         #속도 올리기
+        moveSpeed += 1
+        #최고 속도 이하 제한
         if moveSpeed < maxSpeed:
             moveSpeed += 1    
     #충돌 확인하기
