@@ -22,15 +22,22 @@ GAME_ROOT_FOLDER = os.path.dirname(__file__)
 IMAGE_FOLDER = os.path.join(GAME_ROOT_FOLDER, "Images")
 
 #게임 끝내기 함수
+#메시지를 표시하고 정리하기
 def GameOver():
     #게임 끝내기 문자열 만들기
     fontGameOver = pygame.font.SysFont(textFonts, textSize)
     textGameOver = fontGameOver.render("Game Over!", True, RED)
     rectGameOver = textGameOver.get_rect()
     rectGameOver.center = (IMG_ROAD.get_width()//2, IMG_ROAD.get_height()//2)
+    #점수 표시하기
+    fontGameOver2 = pygame.font.SysFont(textFonts, textSize//2) #글씨 사이즈 절반
+    textGameOver2 = fontGameOver2.render("Score " + str(score), True, RED)
+    rectGameOver2 = textGameOver2.get_rect()
+    rectGameOver2.center = (IMG_ROAD.get_width()//2, IMG_ROAD.get_height()//2 + 80) #글씨 위치 
     #검은색 배경에 게임 오버 메시지 출력하기
     screen.fill(BLACK)
-    screen.blit(textGameOver, rectGameOver)
+    screen.blit(textGameOver, rectGameOver) #게임오버 글씨 위치
+    screen.blit(textGameOver2, rectGameOver2) #점수표시
     #출력 업데이트하기
     pygame.display.update()
     #객체 정리하기
